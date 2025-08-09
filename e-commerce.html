@@ -3,51 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Estoque</title>
-    <link rel="stylesheet" href="e-commerce.css">
+    <title>Dashboard de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Sistema de Estoque</h1>
-    </header>
 
-    <main>
-        <!-- Formulário para adicionar produtos -->
-        <section id="form-section">
-            <h2>Adicionar Produto</h2>
-            <input type="text" id="nome" placeholder="Nome do produto">
-            <input type="number" id="quantidade" placeholder="Quantidade" min="1">
-            <button id="btnAdicionar">Adicionar / Atualizar</button>
-        </section>
+    <!-- Login -->
+    <div id="login-section">
+        <h2>Login</h2>
+        <input type="text" id="usuario" placeholder="Usuário">
+        <input type="password" id="senha" placeholder="Senha">
+        <button id="btnLogin">Entrar</button>
+    </div>
 
-        <!-- Campo de pesquisa -->
-        <section id="search-section">
-            <input type="text" id="pesquisa" placeholder="Pesquisar produto...">
-        </section>
+    <!-- Dashboard -->
+    <div id="app" style="display:none;">
+        <aside class="sidebar">
+            <h2>📦 Estoque</h2>
+            <nav>
+                <a href="#resumo">Resumo</a>
+                <a href="#controle">Controle</a>
+                <a href="#graficos">Gráficos</a>
+                <a href="#historico">Histórico</a>
+            </nav>
+            <button id="btnLogout">Sair</button>
+        </aside>
 
-        <!-- Lista de produtos -->
-        <section id="lista-section">
-            <h2>Estoque Atual</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabela-produtos">
-                    <!-- Produtos aparecerão aqui -->
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" id="total-produtos">Total de itens: 0</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
-    </main>
+        <main class="main-content">
+            <!-- Resumo -->
+            <section id="resumo" class="card-grid">
+                <div class="card">
+                    <h3>Total de Produtos</h3>
+                    <p id="total-produtos-resumo">0</p>
+                </div>
+                <div class="card">
+                    <h3>Total de Itens</h3>
+                    <p id="total-itens-resumo">0</p>
+                </div>
+                <div class="card">
+                    <h3>Estoque Baixo</h3>
+                    <p id="estoque-baixo-resumo">0</p>
+                </div>
+            </section>
 
-    <script src="e-commerce.js"></script>
+            <!-- Controle -->
+            <section id="controle" class="card">
+                <h2>Controle de Estoque</h2>
+                <input type="text" id="nome" placeholder="Nome do produto">
+                <input type="number" id="quantidade" placeholder="Quantidade" min="1">
+                <button id="btnEntrada">Entrada</button>
+                <button id="btnSaida">Saída</button>
+                <input type="text" id="pesquisa" placeholder="Pesquisar produto...">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-produtos"></tbody>
+                </table>
+            </section>
+
+            <!-- Gráficos -->
+            <section id="graficos" class="card">
+                <h2>Gráfico de Estoque</h2>
+                <canvas id="graficoEstoque"></canvas>
+                <h2>Gráfico de Movimentações</h2>
+                <canvas id="graficoMovimentacoes"></canvas>
+            </section>
+
+            <!-- Histórico -->
+            <section id="historico" class="card">
+                <h2>Histórico de Movimentações</h2>
+                <ul id="lista-historico"></ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
